@@ -1,3 +1,7 @@
 /.project
 build/
 CMakeLists.txt.user
+*.code-workspace
+*.vscode
+*.tar.gz
+/cantata-git/

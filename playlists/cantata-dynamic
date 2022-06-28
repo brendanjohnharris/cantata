@@ -637,6 +637,20 @@ sub songRatingInRange() {
     return 0;
 }
 
+sub getRating() {
+    my $stickerEntry=shift;
+    my @parts = split("=", $stickerEntry);
+     if (2==scalar(@parts)) {
+        if ($rating==0) {
+            return 2.5; # Unrated songs
+        } else {
+            return scalar($parts[1]);
+        }
+    }
+    return 2.5;
+}
+
+
 # Get all songs with a rating between ratingFrom & ratingTo
 sub getRatedSongs() {
     my @entries = ();
@@ -863,6 +877,22 @@ sub storeSong() {
     $playQueueHistoryPos++;
 }
 
+sub ratingPlay() {
+    my ($rating)=@_;
+    my $prob=1/(1+$rating**2)
+    my $samp=int(rand());
+    if ($rating==5) {
+        return 1;
+    } else {
+        return 0;
+    }
+    # if ($samp>$prob) {
+    #     return 1;
+    # } else {
+    #     return 0;
+    # }
+}
+
 #
 # This is the 'main' function of the dynamizer
 #
@@ -952,7 +982,9 @@ sub populatePlayQueue() {
                         $file =~ s/\\/\\\\/g;
                         $file =~ s/\"/\\\"/g;
 
-                        if (&checkSongDurationInRange($file, $pos) && &checkSongRatingInRange($file, $pos)) {
+                        my $rating=&getRating()
+
+                        if (&checkSongDurationInRange($file, $pos) && &checkSongRatingInRange($file, $pos) && ratingPlay($rating)) {
                             if ($failues > 100 || &canAdd($origFile, $numMpdSongs)) {
                                 if (&sendCommand("add \"${file}\"") ne '') {
                                     &storeSong($origFile);
