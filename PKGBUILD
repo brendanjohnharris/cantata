@@ -1,7 +1,7 @@
 # Maintainer: goetzc
 # Maintainer: Kim Scarborough <sluggo@unknown.nu>
 pkgname=cantata-git
-pkgver=2.5.0.r7590.af04723c0
+pkgver=2.5.0.r7591.ccf1e14aa
 pkgrel=1
 pkgdesc="Qt5 graphical client for Music Player Daemon (MPD) - git version."
 arch=('i686' 'x86_64' 'aarch64' 'armv7h')

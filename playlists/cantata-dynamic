@@ -879,7 +879,7 @@ sub storeSong() {
 
 sub ratingPlay() {
     my ($rating)=@_;
-    my $prob=1/(1+$rating**2)
+    my $prob=1/(1+$rating**2);
     my $samp=int(rand());
     if ($rating==5) {
         return 1;
@@ -982,9 +982,9 @@ sub populatePlayQueue() {
                         $file =~ s/\\/\\\\/g;
                         $file =~ s/\"/\\\"/g;
 
-                        my $rating=&getRating()
+                        my $rating=&getRating();
 
-                        if (&checkSongDurationInRange($file, $pos) && &checkSongRatingInRange($file, $pos) && ratingPlay($rating)) {
+                        if ((&checkSongDurationInRange($file, $pos) && &checkSongRatingInRange($file, $pos)) && &ratingPlay($rating)) {
                             if ($failues > 100 || &canAdd($origFile, $numMpdSongs)) {
                                 if (&sendCommand("add \"${file}\"") ne '') {
                                     &storeSong($origFile);
