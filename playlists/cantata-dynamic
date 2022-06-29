@@ -977,7 +977,7 @@ sub populatePlayQueue() {
                         $file =~ s/\\/\\\\/g;
                         $file =~ s/\"/\\\"/g;
 
-                        my $rating=&getRating();
+                        my $rating=getRating();
 
                         if ((&checkSongDurationInRange($file, $pos) && &checkSongRatingInRange($file, $pos)) && &ratingPlay($rating)) {
                             if ($failues > 100 || &canAdd($origFile, $numMpdSongs)) {
