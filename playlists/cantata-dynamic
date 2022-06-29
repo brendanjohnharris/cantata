@@ -881,16 +881,11 @@ sub ratingPlay() {
     my ($rating)=@_;
     my $prob=1/(1+$rating**2);
     my $samp=int(rand());
-    if ($rating==5) {
+    if ($samp>$prob) {
         return 1;
     } else {
         return 0;
     }
-    # if ($samp>$prob) {
-    #     return 1;
-    # } else {
-    #     return 0;
-    # }
 }
 
 #
